@@ -1,0 +1,1095 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+html, body {
+	margin: 0;
+	font-family: 'Roboto', serif;
+	background-color: #F1F4F6;
+}
+.header {
+	background: #4E596D;
+	height: 50px;
+	box-sizing: border-box;
+	position: fixed;
+	z-index: 2;
+	width: 100%;
+	font-family: 'Roboto Slab', serif;
+}
+.header .inline {
+	display: inline-block;
+	vertical-align: top;
+}
+.headerConntent {
+	width: 1040px;
+	height: 50px;
+	margin: 0 auto;
+	box-sizing: border-box;
+	position: relative;
+	background-color: #5D687C;
+}
+.headerLogo {
+	width: 280px;
+	height: 50px;
+	box-sizing: border-box;
+	font-size: 24px;
+	border-right: #4E596D solid 1px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 0;
+	padding-left: 70px;
+}
+.headerLogo #switch {
+	float: left;
+	position: absolute;
+	top: 15px;
+	left: 20px;
+	background: none;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+.headerLogo #switch img {
+	height: 20px;
+}
+.headerLogo:hover {
+	background: #464F63;
+}
+.headerLogo a {
+	line-height: 50px;
+	display: block;
+	color: white;
+	text-decoration: none;
+}
+.headerSearch {
+	position: absolute;
+	top: 0px;
+	left: 280px;
+	height: 50px;
+	box-sizing: border-box;
+	padding: 10px 20px;
+}
+.search {
+	height: 30px;
+	background: #fff;
+	border-radius: 3px;
+	padding: 3px 3px 3px 10px;
+	box-sizing: border-box;
+}
+.search input[type=search] {
+	font-family: "Roboto";
+	font-size: 14px;
+	height: 24px;
+	box-sizing: border-box;
+	border: none;
+	outline: none;
+	width: 200px;
+	background: none;
+	margin: 0px;
+	float: left;
+}
+.search button {
+	background: none;
+	outline: none;
+	border: none;
+	margin: 2px 1px;
+	cursor: pointer;
+}
+.search button img {
+	height: 18px;
+}
+.headerList {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	border-left: #4E596D solid 1px;
+	font-size: 14px;
+}
+.headerList a {
+	color: #fff;
+	text-decoration: none;
+	display: inline-block;
+	border-right: #4E596D solid 1px;
+	padding: 0px 20px;
+}
+.headerList a:hover {
+	background: #464F63;
+}
+#hiddenArea {
+	width: 1040px;
+	margin: 0px auto;
+	z-index: 1;
+	position: relative;
+}
+#hiddenBlock {
+	position: absolute;
+	z-index: 5;
+	width: 280px;
+	box-sizing: border-box;
+	min-height: 50px;
+	background: #fff;
+	padding: 10px 0;
+	top: 0px;
+	left: 0px;
+	border: #ccc solid 1px;
+	border-top: none;
+	border-radius: 0 0 3px 3px;
+}
+#hiddenProfile {
+	height: 60px;
+	width: 100%;
+	padding: 10px 5px 10px 20px;
+	box-sizing: border-box;
+}
+#hiddenProfile:hover {
+	background: #F9F9F9;
+}
+#hiddenProfile #meImg {
+	width: 40px;
+	border-radius: 20px;
+	float: left;
+	margin-right: 10px;
+}
+#hiddenProfile #hiddenUsername {
+	color: #000;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: bold;
+	display: block;
+}
+#hiddenProfile #hiddenUsername:hover {
+	color: #4E596D;
+}
+#hiddenProfile #hiddenEmail {
+	color: #333;
+	font-size: 13px;
+}
+#hiddenList a {
+	display: block;
+	text-decoration: none;
+	font-size: 13px;
+	font-weight: bold;
+	color: #222;
+	padding: 5px 10px 5px 0px;
+	position: relative;
+}
+#hiddenList a:hover {
+	background: #F9F9F9;
+}
+#hiddenList a div {
+	position: relative;
+	width: 70px;
+	height: 13px;
+	float: left;
+}
+#hiddenList a img {
+	position: absolute;
+	top: 0px;
+	right: 20px;
+	height: 18px;
+}
+#hiddenCopy {
+	padding: 5px 20px;
+	display: block;
+	font-size: 13px;
+	color: #444;
+	text-align: right;
+}
+#hiddenAlert {
+	color: #131E32;
+	font-size: 14px;
+	display: block;
+	text-align: center;
+	font-weight: bold;
+}
+#loginBlock {
+	width: 280px;
+	border-right: 1px #eee solid;
+	margin: 0px;
+	height: 100%;
+	box-sizing: border-box;
+	padding: 20px;
+}
+#loginBlock h1 {
+	margin: 0 0 5px;
+	font-family: "Roboto Slab";
+	font-size: 20px;
+	text-transform: uppercase;
+	color: #131E32;
+}
+#loginBlock label {
+	display: block;
+	color: #131E32;
+	font-weight: bold;
+	font-size: 14px;
+	padding: 5px 0;
+}
+#loginBlock input[type=password], #loginBlock input[type=email] {
+	display: block;
+	width: 100%;
+	border: 1px #ccc solid;
+	border-radius: 5px;
+	padding: 0px 10px;
+	box-sizing: border-box;
+	font-size: 13px;
+	font-family: "Roboto";
+	line-height: 35px;
+	outline: none;
+	height: 35px;
+	margin-bottom: 5px;
+}
+#loginBlock p {
+	color: #111111;
+	font-size: 13px;
+	margin-top: 0px;
+}
+#loginBlock #remembePswd {
+	padding-left: 2px;
+	color: #131E32;
+	font-weight: bold;
+	font-size: 14px;
+	display: block;
+	margin-top: 10px;
+	width: 120px;
+	float: left;
+}
+#loginBlock button {
+	background: #5D687C;
+	border: 1px solid #4E596D;
+	border-radius: 4px;
+	height: 35px;
+	font-size: 13px;
+	font-family: "Roboto";
+	font-weight: bold;
+	cursor: pointer;
+	color: #fff;
+	width: 80px;
+	float: right;
+	outline: none;
+	margin-top: 10px;
+}
+#loginBlock button:hover {
+	background: #4E596D;
+}
+.main {
+	position: relative;
+	z-index: 0;
+	width: 1040px;
+	box-sizing: border-box;
+	height: 100vh;
+	overflow-y: none;
+	margin: 0 auto;
+	background-color: #fff;
+	padding-top: 50px;
+}
+.main .inline {
+	display: inline-block;
+	vertical-align: top;
+}
+.chats {
+	width: 283px;
+	height: 100%;
+	border-right: #ccc 1px solid;
+	box-sizing: border-box;
+}
+.chatsElement {
+	position: relative;
+	box-sizing: border-box;
+	display: block;
+	height: 70px;
+	border-bottom: 1px solid #eee;
+	border-top: 1px solid #fff;
+	padding: 10px 5px 0 85px;
+	cursor: pointer;
+}
+.chatsConntent, .massageArea {
+	height: 100%;
+	overflow-y: auto;
+	overflow-style: marquee-block;
+}
+::-webkit-scrollbar-button {
+ display:none;
+}
+::-webkit-scrollbar-track {
+background-color:#F1F4F6;
+}
+::-webkit-scrollbar-thumb {
+-webkit-border-radius: 0px;
+border-radius: 0px;
+background-color:#ccc;
+}
+::-webkit-scrollbar-thumb:hover {
+background-color:#4E596D;
+}
+::-webkit-resizer {
+ display:none;
+}
+::-webkit-scrollbar {
+width: 5px;
+}
+.chatsElement:hover {
+	background-color: #E8EBED;
+	border-top: 1px solid #E8EBED;
+	border-bottom: 1px solid #E8EBED;
+}
+.chatsElement .userImg {
+	width: 50px;
+	border-radius: 25px;
+	position: absolute;
+	top: 10px;
+	left: 20px;
+}
+.chatsElement a {
+	margin: 0px;
+	font-size: 14px;
+	text-decoration: none;
+	color: inherit;
+	font-weight: bold;
+}
+.lastMassage {
+	margin-top: 3px;
+	font-size: 13px;
+}
+.massages {
+	position: relative;
+	height: 100%;
+	width: 756px;
+	border-right: 1px solid #ccc;
+}
+.massageHeader {
+	height: 40px;
+	box-sizing: border-box;
+	background-color: #E8EBED;
+	display: block;
+	line-height: 40px;
+	border-bottom: 1px solid #ccc;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+	width: 100%;
+}
+.massageHeader h1 {
+	font-size: 14px;
+	margin: 0px;
+	text-align: center;
+}
+.massageHeader a {
+	text-decoration: none;
+	color: #000;
+}
+.massageContent {
+	box-sizing: border-box;
+	height: 100%;
+	padding: 40px 0px 80px;
+	background: #fdfdfd;
+	position: absolute;
+	z-index: 0;
+	width: 100%;
+}
+.massage {   
+ min-height: 50px;
+	position: relative;
+	padding-left: 55px;
+	color: #000;
+	padding-bottom: 10px;
+}
+.massage .massageImg {
+	width: 40px;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	border-radius: 20px;
+}
+.massage .massageUsername {
+	color: inherit;
+	font-size: 13px;
+	font-weight: bold;
+	text-decoration: none;
+}
+.massage .massageTime {
+	color: #bbb;
+	font-size: 13px;
+	padding-left: 10px;
+}
+.massage .massageText {
+	margin: 1px 0px 4px;
+	line-height: 17px;
+	font-size: 13px;
+}
+.massageArea {
+	padding: 10px 120px 5px 100px;
+	box-sizing: border-box;
+}
+.massageForm {
+	position: absolute;
+	bottom: 0px;
+	height: 70px;
+	width: 100%;
+	box-sizing: border-box;
+	border-top: 1px solid #ccc;
+	padding-left: 155px;
+	padding-right: 100px;
+	background-color: #E8EBED;
+}
+.formUserImg {
+	position: absolute;
+	top: 10px;
+	left: 105px;
+	width: 40px;
+	border-radius: 20px;
+}
+.massageForm .textarea {
+	position:absolute;
+	bottom:10px;
+	width: 500px;
+	height: 52px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	outline: none;
+	word-wrap: break-word;
+	border-radius: 2px;
+	border:1px solid #bbb;
+	box-sizing:border-box;
+	padding:10px 10px;
+	font-family:"Roboto";
+	font-size:13px;
+	background:#fff;
+}
+.massageForm button {
+	background: none;
+	font-family: "Roboto";
+	border: none;
+	border-bottom: 2px solid #4E596D;
+	font-size: 14px;
+	font-weight: bold;
+	cursor: pointer;
+	color: #4E596D;
+	padding: 3px 3px 1px;
+	outline: none;
+	border-radius: 1px;
+}
+.massageForm button:hover {
+	color: #424D61;
+	border-bottom: 2px solid #424D61;
+}
+/**people*/
+
+.filters {
+	width: 280px;
+	border-right: 1px solid #eee;
+	height: 100%;
+	box-sizing: border-box;
+	padding: 20px;
+	position: fixed;
+}
+.filters h5 {
+	margin: 0px;
+	font-family: "Roboto Slab";
+	font-size: 13px;
+	color: #131E32;
+	padding: 11px 15px;
+	border-bottom: 1px solid #5D687C;
+	text-transform: uppercase;
+	background: #E8EBED;
+	border-radius: 2px 2px 0 0;
+}
+#filterElements {
+	margin-bottom: 40px;
+}
+#filterElements .active {
+	background: #F1F4F6;
+	border-radius: 2px;
+}
+#filterElements a {
+	display: block;
+	color: #131E32;
+	font-size: 13px;
+	text-decoration: none;
+	font-weight: bold;
+	border: 1px solid #E6E9EB;
+	border-top: none;
+	padding: 12px 5px 12px 20px;
+}
+#filterElements a:hover {
+	color: #2D384C;
+}
+.filterHeader {
+	display: block;
+	color: #3F4A5E;
+	font-weight: bold;
+	font-size: 14px;
+	padding: 5px 0px 5px 0px;
+}
+.selectBlock {
+	border: 1px solid #E6E9EB;
+	border-top: none;
+	padding: 5px 15px 15px;
+}
+.selectBlock select {
+	border-radius: 2px;
+	padding: 4px;
+	outline: none;
+	font-family: "Roboto";
+	border: 1px solid #ccc;
+	width: 100%;
+}
+.selectBlock input[type=text] {
+	width: 50px;
+	padding: 5px 0px;
+	border-radius: 2px;
+	font-size: 13px;
+	font-family: "Roboto";
+	border: 1px solid #ccc;
+	text-align: center;
+	margin-top: 3px;
+	outline: none;
+}
+#space {
+	padding: 0 10px;
+}
+.noAutoScroll {
+	height: auto !important;
+	min-height: 100vh;
+}
+.streamPeople {
+	min-height: 100%;
+	padding: 20px;
+	width: 760px;
+	margin-left: 280px;
+	box-sizing: border-box;
+	overflow-y: auto;
+	border-right: 1px solid #ccc;
+}
+ input::-webkit-search-decoration, input::-webkit-search-cancel-button, input::-webkit-search-results-button, input::-webkit-search-results-decoration {
+display: none;
+}
+::-ms-clear {
+display: none;
+width : 0;
+height: 0;
+}
+::-ms-reveal {
+display: none;
+width : 0;
+height: 0;
+}
+#searchForm input[type=search] {
+	outline: none;
+	font-family: "Roboto";
+	font-size: 14px;
+	padding: 10px 0px 10px 10px;
+	height: 40px;
+	box-sizing: border-box;
+	margin: 0px;
+	width: 670px;
+	border: #ccc 1px solid;
+	border-right: none;
+	border-radius: 2px 0 0 2px;
+}
+#searchForm input[type=search], #searchForm button {
+	display: inline-block;
+	vertical-align: top;
+}
+#searchForm button {
+	height: 40px;
+	width: 40px;
+	outline: none;
+	cursor: pointer;
+	background: #5D687C;
+	border: 1px solid #4E596D;
+	border-radius: 0 2px 2px 0;
+}
+#searchForm button img {
+	height: 20px;
+	margin: 3px auto;
+}
+.streamElement {
+	display: inline-block;
+	border: 1px solid #eee;
+	border-radius: 2px;
+	width: 345px;
+	margin: 20px 20px 10px 0;
+	box-sizing: border-box;
+	position: relative;
+	height: 100px;
+	padding-left: 105px;
+}
+.streamElement:nth-child(2n) {
+	margin-right: 0;
+}
+.streamImg {
+	width: 80px;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	border-radius: 40px;
+}
+.streamElement .userName {
+	display: block;
+	margin-top: 10px;
+	font-family: "Roboto";
+	font-size: 15px;
+	font-weight: bold;
+	color: #3F4A5E;
+	text-decoration: none;
+}
+.streamElement .streamDescription {
+	font-size: 14px;
+	display: block;
+	margin-top: 3px;
+}
+.streamElement .addFriend {
+	display: block;
+	background: #E8EBED;
+	border: #B0B3B5 1px solid;
+	border-radius: 2px;
+	width: 135px;
+	line-height: 25px;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	text-decoration: none;
+	height: 25px;
+	color: #101B2F;
+	margin-top: 10px;
+}
+.streamElement .addFriend:hover {
+	color: #fff;
+	background: #5D687C;
+	border: 1px solid #4E596D;
+}
+.streamElement .friend {
+	display: block;
+	border-radius: 2px;
+	width: 135px;
+	line-height: 25px;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	text-decoration: none;
+	height: 25px;
+	margin-top: 10px;
+	color: #fff;
+	background: #5D687C;
+	border: 1px solid #4E596D;
+}
+#remBlock {
+	padding: 20px;
+}
+#remBlock h1 {
+	margin: 0px 0px 10px;
+	font-family: "Roboto Slab";
+	font-size: 20px;
+	color: #131E32;
+}
+#remBlock p {
+	font-size: 14px;
+	color: #131E32;
+}
+#remBlock form {
+	width: 400px;
+}
+#remBlock label {
+	display: block;
+	font-size: 14px;
+	font-weight: bold;
+}
+#remBlock input {
+	width: 100%;
+	margin: 10px 0;
+	border: 1px #ccc solid;
+	border-radius: 2px;
+	padding: 0px 10px;
+	box-sizing: border-box;
+	font-size: 13px;
+	font-family: "Roboto";
+	line-height: 35px;
+	outline: none;
+	height: 35px;
+}
+#remBlock button {
+	background: #5D687C;
+	border: 1px solid #4E596D;
+	border-radius: 2px;
+	height: 35px;
+	font-size: 13px;
+	font-family: "Roboto";
+	font-weight: bold;
+	cursor: pointer;
+	color: #fff;
+	width: 120px;
+	float: right;
+	outline: none;
+}
+#canals {
+	width: 280px;
+	min-height: 100%;
+	border-right: 1px #eee solid;
+	box-sizing: border-box;
+	position:fixed;
+}
+.height100 {
+	min-height: 800px;
+	height: auto !important;
+}
+#canalsList {
+	height: 100%;
+	box-sizing: border-box;
+}
+#canalsList a:hover {
+	background: #8C97AB;
+	color:#fff;
+}
+ .activeA {
+	background: #5D687C !important;
+	color:#fff !important;
+}
+#canalsList h5 {
+	margin: 16px 0 0px;
+	padding: 5px 30px 10px;
+	border-bottom: 1px solid #bbb;
+	font-family: "Roboto Slab";
+	text-transform: uppercase;
+	font-size: 16px;
+	color: #333;
+}
+#canalsList .generalized {
+	display: block;
+	position: relative;
+	width: 100%;
+	line-height: 40px;
+	height: 40px;
+	box-sizing: border-box;
+	background: #fafafa;
+	border-bottom: 1px solid #eee;
+	color: #0D182C;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: bold;
+	padding-left: 75px;
+}
+#canalsList h5:nth-child(2n){
+	margin-top:30px;
+}
+#canalsList .active{
+	background:#5D687C;
+	color: #fff;
+	border-bottom: 1px solid #5D687C;
+}
+#canalsList .friendCanal {
+	display: block;
+	position: relative;
+	background: #fafafa;
+	border-bottom: 1px solid #eee;
+	width: 100%;
+	line-height: 50px;
+	height: 50px;
+	box-sizing: border-box;
+	color: #0D182C;
+	text-decoration: none;
+	font-size: 14px;
+	font-weight: bold;
+	padding-left: 80px;
+}
+#canalsList a img {
+	width: 34px;
+	height: 34px;
+	position: absolute;
+	left: 30px;
+	top: 8px;
+	border-radius: 18px;
+}
+#canalsList .generalized img {
+	width: 22px;
+	height: 22px;
+	left: 35px;
+	top:9px;
+	border-radius: 0px;
+}
+#canalsList button {
+	margin: 15px 30px;
+	box-sizing: border-box;
+	background: #FAFAFA;
+	color: #111;
+	border: 1px solid #eee;
+	border-radius: 2px;
+	height: 35px;
+	width: 220px;
+	cursor: pointer;
+	font-weight: bold;
+	outline: none;
+	font-family: "Roboto";
+}
+#canalsList button:hover {
+	background: #eee;
+}
+#streamFeed {
+	margin: 0px;
+	width: 760px;
+	box-sizing: border-box;
+	height:auto;
+	margin-left:280px;
+}
+#streamFeed #formBlock{
+	display:block;
+	width:100%;
+	padding:20px 20px 20px 85px;
+	box-sizing:border-box;
+	position:relative;
+	background:#FAFAFA;
+	text-align:right;
+}
+#streamFeed .userImage{
+	position:absolute;
+	top:21px;
+	left:21px;
+	width:52px;
+	border-radius:26px;
+}
+#streamFeed .textarea {
+	text-align:left;
+	width: 100%;
+	min-height: 52px;
+	max-height: 200px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	outline: none;
+	word-wrap: break-word;
+	border-radius: 2px;
+	border:1px solid #bbb;
+	box-sizing:border-box;
+	padding:10px 10px;
+	font-family:"Roboto";
+	font-size:13px;
+	background:#fff;
+}
+
+.textarea:empty:not(:focus):before{
+    content:attr(data-text);
+	color: #555;
+}
+.no_text{
+	background:#ccc;
+	color:#444;
+	user-select: none;
+}
+#streamFeed .sendButton{
+	background:#5D687C;
+	border: 1px solid #4E596D;
+	color: #fff;
+	cursor:pointer;
+	border-radius:2px;
+	width:100px;
+	height:30px;
+	font-family:"Roboto";
+	font-size:14px;
+	outline:none;
+	margin-top:10px;
+}
+#streamFeed .sendButton:hover{
+	background:#4E596D;
+}
+.sreamPosts{
+	display:block;
+	box-sizing:border-box;
+	padding:0px 0 20px;
+	width:100%;
+}
+.streamElementPost{
+	width:100%;
+	box-sizing:border-box;
+	margin:0px 0 20px;
+	position:relative;
+	padding:10px 20px 0 75px;
+	border-top:1px solid #eee;
+}
+.streamElementPost .userImagePost{
+	position:absolute;
+	top:15px;
+	left:20px;
+	width:50px;
+	border-radius:25px;
+}
+.elementText{
+	box-sizing:border-box;
+	padding:5px 10px 0;
+	
+}
+.elementText .postUserName{
+	display: block;
+	font-size:14px;
+	font-weight:bold;
+	text-decoration:none;
+	color:#191929;
+}
+.elementText .postTime{
+	color: #333;
+	font-size: 13px;
+}
+.elementText .elementContentText{
+	font-size:14px;
+	line-height:1.46;
+	padding-top:10px;
+}
+.profile{
+	box-sizing:border-box;
+	padding:20px;
+}
+.profile .userMainImg{
+	width:100%;
+	border-radius:2px;
+	
+}
+.profile .addToFriend{
+	width:100%;
+	margin:10px 0;
+	border-radius:2px;
+	border:1px solid #4E596D;
+	color:#fff;
+	background:#5D687C;
+	font-size:14px;
+	height:35px;
+	font-family:"Roboto";
+	cursor:pointer;
+	outline:none;
+}
+.profile .addToFriend:hover{
+	background:#3F4A5E;
+}
+
+.profile .removeFromFriend{
+	width:100%;
+	margin:10px 0;
+	border-radius:2px;
+	border:1px solid #CDCDCD;
+	color:#1C273B;
+	font-weight:bold;
+	background:#F1F4F6;
+	font-size:14px;
+	height:35px;
+	font-family:"Roboto";
+	cursor:pointer;
+	outline:none;
+}
+.profile .removeFromFriend:hover{
+	background:#B2B2B2;
+}
+
+.profile .sleepFriend{
+	width:100%;
+	margin:10px 0;
+	border-radius:2px;
+	font-weight:bold;
+	border:1px solid #CDCDCD;
+	color:#1C273B;
+	background:#F1F4F6;
+	font-size:14px;
+	height:35px;
+	font-family:"Roboto";
+	outline:none;
+	cursor: auto;
+}
+
+.profileFeed .userProfilename{
+	margin:15px 20px 10px;
+	display:block;
+	font-size:24px;
+	font-weight:400;
+	border-bottom:1px solid #eee;
+	padding-bottom:5px;
+}
+.profileBlockInfo{
+	margin:0px 20px;
+	font-size:13px;
+	line-height:19px;
+}
+.profileBlockInfo ul{
+	margin:10px 0;
+	padding-left:5px;
+}
+.profileBlockInfo ul li{
+	list-style:none;
+	margin:4px 0;
+	display:block;
+	width:100%;
+}
+.profileBlockInfo ul li b{
+	width:80px;
+	display:block;
+	color: #2A3549;
+}
+.profileBlockInfo ul li span{
+	display:block;
+	width:620px;
+	color: #222;
+}
+.userFriendsBlock{
+	padding:0 20px 20px;
+}
+.userFriendsBlock h5{
+	margin:20px 3px 10px;
+	color:#2A3549;
+	font-size:14px;
+	padding-bottom:6px;
+	width:100%;
+}
+.userFriendsBlock .friendElement{
+	width:82px;
+	text-align:center;
+	font-size:13px;
+}
+.userFriendsBlock .friendElement img{
+	width:60px;
+	border-radius:30px;
+	margin-bottom:5px;
+}
+.userFriendsBlock .friendElement a{
+	color:#222;
+	text-decoration:none;
+}
+.userFriendsBlock .friendElement a:hover{
+	text-decoration:underline;
+}
+.linksList{
+	display:block;
+	border-bottom:2px solid #ddd;
+	padding: 5px 20px ;
+	margin-top:0px;
+}
+.linksList .linkList{
+	font-weight:bold;
+	font-size:16px;
+	text-decoration:none;
+	color: #333;
+	border-bottom:2px solid #aaa;
+	padding: 5px 2px;
+	margin-right:10px;
+}
+.linksList .active, .linksList .linkList:hover{
+	color: #1E293D;
+	border-bottom:2px solid #1E293D;
+	
+}
+.subStrError{
+	color:#FF0000 !important;
+	margin:0;
+	font-size:12px !important;
+	font-weight:bold;
+	padding:5px 2px;
+}
+#select_chat{
+	text-align:center;
+	padding-top:150px;
+}
+#select_chat img{
+	width:200px;
+	display:blok;
+
+}
+#select_chat{
+	color:#5D687C;
+	font-size:24px;
+	
+}
