@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace app\controllers;
 
-use app\model\Access as Model;
+use app\model\{Access as Model, service\Mailer};
 use app\controllers\service\Reporter;
 
 
@@ -16,113 +16,72 @@ class Access {
 	 * return bool false - ошибка/ true - успех
 	 */
 	 
-	public function signIn():bool{
-		if(!Model::checkParametrs($_REQUEST, ["pswd","email"])){
-			Reporter::error_report(1);
-			return false;
-		};
+	public function signIn():bool
+	{
+		if(!Model::checkParametrs($_REQUEST, ["pswd","email"]))
+			return Reporter::error_report(1);
+			
 		
 		Model::setPswdAndEmail($_REQUEST["email"],$_REQUEST["pswd"]);
 		
-		if(!Model::setDBSession()){
+		if(!Model::setDBSession())
 			return false;
+		
+		$user_status = Model::getUserStatus();
+		if($user_status == 0)
+			return Reporter::error_report(2);
+		if($user_status == 1){
+			return Reporter::output(["user_status" => 1]);
 		}
-		if(!Model::setUserIdThroughPswdAndEmail()){
-			Reporter::error_report(2);
-			return false;
-		};
-		if(!Model::createToken()){
-			Reporter::error_report(101);
-			return false;
-		};
-		Reporter::output(["token" => Model::getToken()]);
-		return true;
+		if(!Model::createToken())
+			return Reporter::error_report(101);
+			
+		return Reporter::output(["token" => Model::getToken(), "user_status" => 2]);
+
 		
 	}
 	
-	/*
-	 * Подтверждение регистрации 
-	 * @param string email (get)
-	 * @param string reg_key (get)
-	 * http://localhost:8090/access-regConfirmation?email=vin-ni-kov@yandex.ru&reg_key=5FiJzvK6Pmgob1qxdWR8j0Q2BUDpZtksf3IYTOlncyHXauCMSLG4hewN7EVA
-	 
-	public function regConfirmation(){
-		if(!isset($_GET['email']) or !isset($_GET['reg_key']) ){
-			systemError(5, "Ошибка, вы не указали какой-то из параметров!");
-		}
-		if(!filter_var($_GET['email'], FILTER_VALIDATE_EMAIL) or strlen($_GET['reg_key']) != 60){
-			systemError(1, "Некорректная передача параметров!");
-		}
-		$access = new GetAccess();
-		$user_id = $access->getIdByEmailAndKey($_GET['email'], $_GET['reg_key']);
-		if($user_id > 0){
-			if($access->updateStatus($user_id, 2)){
-				$token = $access->createToken($user_id);
-				echo json_encode(["error" => 0, "user_id" => $user_id, "token" => $token]);
-			}else{
-				systemError(3, "Неизвестная ошибка. Не удалось обновить статус аккаунта!");
-			}
-		}else{
-			systemError(2, "Пользователь с такой комбинации ключа и email уже подтвердил свой аккаунт, либо такой аккаунт отсутствует вовсе!");
-		}
-		unset($access);
+	
+	public function signUp():bool
+	{
+		$_REQUEST['birthday'] = ["b_d" => "07", "b_m" => "05", "b_y" => "1998"];
+		if(!Model::checkParametrs($_REQUEST, ["f_name","l_name","pswd","email", "birthday", "gender", "callback_url"]))
+			return Reporter::error_report(1);
+		$f_name = $_REQUEST["f_name"];
+		$l_name = $_REQUEST["l_name"];
+		$pswd = $_REQUEST["pswd"];
+		$eml = $_REQUEST["email"];
+		$birthday = $_REQUEST["birthday"];
+		$gender = intval($_REQUEST["gender"]);
+		$callback = $_REQUEST["callback_url"];
+		
+		if(!Model::checkCorrectnesSignUpParams($f_name, $l_name, $pswd, $eml, $birthday, $gender)) return false;
+		if(!Model::setDBSession()) return false;
+		
+		if(Model::checkEmailInDB($eml)) return Reporter::error_report(35);
+		$user_id = Model::registerNewUser($f_name, $l_name, $pswd, $eml, intval($birthday["b_d"]),intval($birthday["b_m"]),intval($birthday["b_y"]), $gender);
+		
+		if($user_id === 0) return Reporter::error_report(103);
+		$key = Model::getRegKey();
+		(strrchr($callback, "?") === false) ? $callback .= "?" : $callback .= "&";
+		$callback .= "user_id=".$user_id."&reg_key=".$key;
+		$email_arr = Mailer::constructSignUpEmail($f_name." ".$l_name, $callback, $key);
+		if(!Mailer::sendMail($eml, "Подтверждение регистрации", $email_arr["body"], $email_arr["headers"])) return false;
+		Model::setConfirmationRegTime($user_id);
+		return Reporter::output(["email" => $eml, "user_id" => $user_id]);
+			
+		
+		
 	}
 	
+	public function unsetToken():bool
+	{
+		
+		if(!isset($_REQUEST["token"]))
+			return Reporter::error_report(1);
+		return (Model::removeSession($_REQUEST["token"]))? Reporter::output_no_errors(): false;
+	}
 	
-	/*
-	 * Создание нового аккаунта
-	 * @param string f_name (get)
-	 * @param string l_name (get)
-	 * @param string email (get)
-	 * @param string pswd (get)
-	 * @param int gender (get)
-	 * @param int year (get)
-	 * @param int month (get)
-	 * @param int day (get)
-	 * http://localhost:8090/access-checkIn?f_name=Alex&l_name=Vinnikov&email=mr.a-vinnikov@yandex.ru&password=d9c436b3d4e1f1d22614643588100e16&gender=2&year=2014&month=11&day=1
-	 
-	public function checkIn(){
-		if(!isset($_GET['f_name']) or !isset($_GET['l_name']) or !isset($_GET['email']) or !isset($_GET['pswd']) or !isset($_GET['gender']) or !isset($_GET['year']) or !isset($_GET['month']) or !isset($_GET['day'])){
-			systemError(5, "Ошибка, вы не указали какой-то из параметров!");
-		}
-		$access = new GetAccess();
-		$email_flag = false;
-		if(filter_var($_GET['email'], FILTER_VALIDATE_EMAIL) ){
-			$email_flag = $access->checkEmailInDB($_GET['email']);
-		}else{
-			systemError(1, "Передайте корректный email!");
-		}
-		if(!$email_flag){
-			systemError(2, "Пользователь с таким Email адресом уже существует!");
-		}
-		$f_n_length = mb_strlen($_GET['f_name']);
-		$l_n_length = mb_strlen($_GET['l_name']);
-		
-		$f_n_flag    = (boolean) ($f_n_length >= 2 and $f_n_length <= 24);
-		$l_n_flag    = (boolean) ($l_n_length >= 2 and $l_n_length <= 24);
-		$pswd_flag   = (boolean) (mb_strlen($_GET['pswd']) === 32);
-		$gender_flag = (boolean) (intval($_GET['gender']) === 2 or intval($_GET['gender']) ===  1);
-		
-		if(!$f_n_flag or !$l_n_flag or !$pswd_flag or !$gender_flag){
-			systemError(3, "Длина имени или фамилии от 2 до 24 знаков. Пароль должен передавать в зашифрованном md5 виде. Диапозон знаений пола [1,2].");
-		}
-		
-		$year = intval($_GET['year']);
-		$month = intval($_GET['month']);
-		$day = intval($_GET['day']);
-		
-		if($year < 1930 or $year > (intval(date('Y'))-4) or !checkdate($month,$day,$year)){
-			systemError(4, "Передана некорректная дата. Доступный диапазон лет [1930; ".(intval(date('Y'))-4)."]");
-		}
-		 
-		$user_data = $access->addNewUser($_GET['f_name'], $_GET['l_name'], $_GET['email'], $_GET['pswd'], intval($_GET['gender']), $year, $month, $day);
-		if(count($user_data)){
-			echo json_encode(["error" => 0, "user_data" => $user_data]);
-		}else{
-			systemError(9, "Неизвестная ошибка при регистрации пользователя или отправки письма!");
-		}
-		
-	}*/
 	
 	
 }

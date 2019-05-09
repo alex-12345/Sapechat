@@ -28,5 +28,17 @@ trait Db{
 		
 	}
 	
+	public static function getFetch(string $sql, array $params):array{
+		$query = self::$db_session->prepare($sql);
+		$query->execute($params);
+		return $query->fetch();
+	}
+	
+	public static function getFetchAll(string $sql, array $params):array{
+		$query = self::$db_session->prepare($sql);
+		$query->execute($params);
+		return $query->fetchAll();
+	}
+	
 	
 }
