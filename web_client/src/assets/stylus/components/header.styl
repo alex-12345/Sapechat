@@ -9,6 +9,82 @@ header
     width: 100%
     font-family: $h_font
 
+    #hidden-area 
+        width: 1040px
+        margin: 0px auto
+        z-index: 1
+        position: relative
+    
+    #hidden-block 
+        position: absolute
+        z-index: 5
+        width: 280px
+        box-sizing: border-box
+        min-height: 50px
+        background: #fff
+        padding: 10px 0
+        top: 0px;
+        left: 0px;
+        border: #ccc solid 1px
+        border-top: none;
+        border-radius: 0 0 3px 3px
+    #hidden-profile 
+        height: 60px
+        width: 100%
+        padding: 10px 5px 10px 20px
+        box-sizing: border-box
+        &:hover 
+            background: #F9F9F9
+
+        #me-img 
+            width: 40px
+            border-radius: 20px
+            float: left
+            margin-right: 10px
+        #hidden-username
+            color: #000;
+            text-decoration: none
+            font-size: 14px
+            font-weight: bold
+            display: block
+            &:hover
+                color: #4E596D
+
+        #hidden-email
+            color: #333
+            font-size: 13px
+
+    #hidden-list
+        a
+            display: block
+            text-decoration: none
+            font-size: 13px
+            font-weight: bold
+            color: #222
+            padding: 5px 10px 5px 0px
+            position: relative
+            &:hover
+                background: #F9F9F9
+            
+            div
+                position: relative
+                width: 70px
+                height: 13px
+                float: left
+            img
+                position: absolute
+                top: 0px
+                right: 20px
+                height: 18px
+
+    #hidden-version
+        padding: 5px 20px
+        display: block
+        font-size: 13px
+        color: #444
+        text-align: right
+
+
 #h-content
     width: 1040px
     height: $height
@@ -32,6 +108,7 @@ header
         width: 280px
         height: $height
         border-right: $header_border_color solid 1px;
+        box-sizing:border-box
         &:hover
             background-color:  $header_hover_bcolor;
 
@@ -107,88 +184,9 @@ header
             display: inline-block
             border-right: $header_border_color solid 1px
             padding: 0px 20px
-/*
+    
 
-#hiddenArea {
-    width: 1040px;
-    margin: 0px auto;
-    z-index: 1;
-    position: relative;
-}
-#hiddenBlock {
-    position: absolute;
-    z-index: 5;
-    width: 280px;
-    box-sizing: border-box;
-    min-height: 50px;
-    background: #fff;
-    padding: 10px 0;
-    top: 0px;
-    left: 0px;
-    border: #ccc solid 1px;
-    border-top: none;
-    border-radius: 0 0 3px 3px;
-}
-#hiddenProfile {
-    height: 60px;
-    width: 100%;
-    padding: 10px 5px 10px 20px;
-    box-sizing: border-box;
-}
-#hiddenProfile:hover {
-    background: #F9F9F9;
-}
-#hiddenProfile #meImg {
-    width: 40px;
-    border-radius: 20px;
-    float: left;
-    margin-right: 10px;
-}
-#hiddenProfile #hiddenUsername {
-    color: #000;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    display: block;
-}
-#hiddenProfile #hiddenUsername:hover {
-    color: #4E596D;
-}
-#hiddenProfile #hiddenEmail {
-    color: #333;
-    font-size: 13px;
-}
-#hiddenList a {
-    display: block;
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: bold;
-    color: #222;
-    padding: 5px 10px 5px 0px;
-    position: relative;
-}
-#hiddenList a:hover {
-    background: #F9F9F9;
-}
-#hiddenList a div {
-    position: relative;
-    width: 70px;
-    height: 13px;
-    float: left;
-}
-#hiddenList a img {
-    position: absolute;
-    top: 0px;
-    right: 20px;
-    height: 18px;
-}
-#hiddenCopy {
-    padding: 5px 20px;
-    display: block;
-    font-size: 13px;
-    color: #444;
-    text-align: right;
-}
+/*
 #hiddenAlert {
     color: #131E32;
     font-size: 14px;
