@@ -10,7 +10,7 @@ header
     font-family: $h_font
 
     #hidden-area 
-        width: 1040px
+        width: $content_width
         margin: 0px auto
         z-index: 1
         position: relative
@@ -48,7 +48,7 @@ header
             font-weight: bold
             display: block
             &:hover
-                color: #4E596D
+                color: $header_external_bcolor
 
         #hidden-email
             color: #333
@@ -93,7 +93,7 @@ header
         font-weight: bold
 
 #h-content
-    width: 1040px
+    width: $content_width
     height: $height
     margin: 0 auto
     box-sizing: border-box

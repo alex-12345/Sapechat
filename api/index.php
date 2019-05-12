@@ -5,6 +5,7 @@ declare(strict_types=1);
 $start = microtime(true);
 ini_set('display_errors', "1");
 header("Access-Control-Allow-Origin: http://sapechat.ru");
+header("Access-Control-Allow-Origin: http://localhost:8080");
 //включаем ввывод всех ошибок
 
 //подключаем основную библиотеку и конфигурационный файл

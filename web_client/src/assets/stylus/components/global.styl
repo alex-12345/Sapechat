@@ -11,6 +11,8 @@ $bold_h_color= #131E32
 $h_font = 'Roboto Slab', serif
 $primary_font = 'Roboto', serif
 
+$content_width = 1040px
+
 html, body 
     margin: 0;
     font-family: $primary_font
@@ -51,3 +53,17 @@ input::-webkit-search-decoration, input::-webkit-search-cancel-button, input::-w
 
 .active
     display:none
+
+#main-content-wrapper
+    position: relative
+    z-index: 0
+    width: 1040px
+    box-sizing: border-box
+    height: 100vh
+    overflow-y: none
+    margin: 0 auto
+    background-color: #fff
+    padding-top: 50px
+    .inline 
+	    display: inline-block;
+	    vertical-align: top;
