@@ -1,12 +1,20 @@
 import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT } from '../actions/auth'
 import { USER_REQUEST } from '../actions/user'
 import apiCall from '../../utils/api'
+//import {getCookie, setCookie, deleteCookie} from '../../utils/cookie'
 
-const state = { token: localStorage.getItem('user-token') || '', status: '', hasLoadedOnce: false }
+const state = { 
+  token: localStorage.getItem('user-token') || '', 
+  status: '', 
+  hasLoadedOnce: false 
+}
 
 const getters = {
-  isAuthenticated: state => !!state.token,
+  isAuthenticated: state => { 
+    return !!state.token
+  },
   authStatus: state => state.status,
+  getToken: state => state.token
 }
 
 const actions = {
@@ -15,11 +23,9 @@ const actions = {
       commit(AUTH_REQUEST)
       apiCall('access-signIn','POST',user)
       .then(resp => {
-        console.log(resp)
-        localStorage.setItem('user-token', resp.data.token)
-        localStorage.setItem('user-status', resp.data.user_status)
-        commit(AUTH_SUCCESS, resp)
-        dispatch(USER_REQUEST)
+        localStorage['user-token'] = resp.data.token;
+        commit(AUTH_SUCCESS, resp.data)
+        //dispatch(USER_REQUEST)
         resolve(resp)
       })
       .catch(err => {
@@ -31,9 +37,14 @@ const actions = {
   },
   [AUTH_LOGOUT]: ({commit, dispatch}) => {
     return new Promise((resolve, reject) => {
-      commit(AUTH_LOGOUT)
-      localStorage.removeItem('user-token')
-      resolve()
+      apiCall('access-unsetToken','POST', {"token" : state.token})
+      .then(resp => {
+        console.log(resp);
+          commit(AUTH_LOGOUT)
+          localStorage.removeItem('user-token')
+          resolve()
+        }
+      )
     })
   }
 }
@@ -53,6 +64,7 @@ const mutations = {
   },
   [AUTH_LOGOUT]: (state) => {
     state.token = ''
+    state.status = ''
   }
 }
 

@@ -15,12 +15,12 @@
               input(type='search', name='query', placeholder='Введите запрос...', required='', maxlength='40', autocomplete='off')
               button(@click="search()")
                 img(src='./assets/static/images/search_gray.png', alt='')
-          #h-links(v-if="signin_pass")
-            router-link.h-link(to="/im") Профиль
+          #h-links(v-if="checkAuth")
+            router-link.h-link(to="/im") Профиль 
             router-link.h-link(to="/feed") Лента
             router-link.h-link(to="/messenger") Диалоги
             router-link.h-link(to="/people") Люди
-            router-link.h-link(to="/logout") Выход
+            a(@click.prevent="logout" href="/logout" style="cursor:pointer") Выход
           #h-links(v-else)
             router-link.h-link(to="/signup") Регистрация
         #hidden-area
@@ -40,7 +40,7 @@
                   div
                     img(src='./assets/static/images/setting_gray.png', alt='')
                   |         Настройки
-                router-link(to="/logout")
+                a(@click.prevent="logout" href="/logout" style="cursor:pointer")
                   div
                     img(src='./assets/static/images/logout_gray.png', alt='')
                   |         Выход
@@ -53,12 +53,28 @@
 </template>
 
 <script>
+import {AUTH_LOGOUT} from './store/actions/auth'
+import store from './store'
+
 export default {
   data() {
     return {
-      signin_pass: true,
+      signin_pass: false,
       switchShow: false,
-      info: 123
+      user_brief_info: {}
+    }
+  },
+  methods: {
+      logout: function () {
+        this.$store.dispatch(AUTH_LOGOUT).then(() => {
+          this.switchShow = false
+          this.$router.push('/')
+        })
+    }
+  },
+  computed:{
+    checkAuth(){
+      return this.signin_pass = store.getters.isAuthenticated;
     }
   }
 }
