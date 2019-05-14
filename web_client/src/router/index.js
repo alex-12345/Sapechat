@@ -2,12 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import Feed from '@/components/Feed'
+import {BRIEF_SET} from '../store/actions/global'
 import store from '../store'
-import {AUTH_LOGOUT} from '../store/actions/auth'
-//import axios from 'axios'
-//import VueAxios from 'vue-axios'
 
-//Vue.use(VueAxios, axios)
 Vue.use(Router)
 
 const ifNotAuthenticated = (to, from, next) => {
@@ -25,20 +22,7 @@ const ifAuthenticated = (to, from, next) => {
   }
   next('/')
 }
-/*
-const logout = () =>{
-  if (!store.getters.isAuthenticated) {
-    next('/')
-    return
-  }
-  store.dispatch(AUTH_LOGOUT).then(() => {
-    next('/')
-    return
-  })
-}
-*/
-
-export default new Router({
+let router = new Router({
   mode: 'history',
   routes: [
     {
@@ -52,10 +36,15 @@ export default new Router({
       name: "feed",
       component: Feed,
       beforeEnter: ifAuthenticated,
-    },
-    /*{
-      path: "/logout",
-      beforeEnter:logout
-    }*/
+    }
+    
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  store.dispatch(BRIEF_SET, false)
+  next()
+  return
+})
+
+export default router

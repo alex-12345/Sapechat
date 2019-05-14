@@ -25,7 +25,7 @@ const actions = {
       .then(resp => {
         localStorage['user-token'] = resp.data.token;
         commit(AUTH_SUCCESS, resp.data)
-        //dispatch(USER_REQUEST)
+        dispatch(USER_REQUEST, state.token)
         resolve(resp)
       })
       .catch(err => {

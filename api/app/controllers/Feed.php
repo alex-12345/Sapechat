@@ -9,7 +9,7 @@ use app\controllers\service\{RestrictedAccess, Reporter};
 class Feed extends RestrictedAccess{
 	use service\Singleton;
 	
-	public function gedUserDataBrief():bool{
+	public function getUserDataBrief():bool{
 		if(!isset($_REQUEST["token"]))
 			return Reporter::error_report(1);
 		

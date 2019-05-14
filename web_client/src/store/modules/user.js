@@ -3,23 +3,27 @@ import apiCall from '../../utils/api'
 import Vue from 'vue'
 import { AUTH_LOGOUT } from '../actions/auth'
 
-const state = { status: '', profile: {} }
+const state = { status: '', userBrief: {} }
 
 const getters = {
-  getProfile: state => state.profile, 
-  isProfileLoaded: state => !!state.profile.name,
+  userBrief: (state, token) => {
+    
+    /*if(!state.userBrief.user_id){
+      dispatch(USER_REQUEST, token)
+    }*/
+    return state.userBrief
+
+  }
 }
 
 const actions = {
-  [USER_REQUEST]: ({commit, dispatch}) => {
-    commit(USER_REQUEST)
-    apiCall({url: 'user/me'})
+  [USER_REQUEST]: ({commit, dispatch}, user_token) => {
+    apiCall('feed-getUserDataBrief?token=' + user_token, 'GET')
       .then(resp => {
-        commit(USER_SUCCESS, resp)
+        commit(USER_SUCCESS, resp.data)
       })
       .catch(resp => {
         commit(USER_ERROR)
-        // if resp is unauthorized, logout, to
         dispatch(AUTH_LOGOUT)
       })
   },
@@ -27,11 +31,9 @@ const actions = {
 
 const mutations = {
   [USER_REQUEST]: (state) => {
-    state.status = 'loading'
   },
   [USER_SUCCESS]: (state, resp) => {
-    state.status = 'success'
-    Vue.set(state, 'profile', resp)
+    Vue.set(state, 'userBrief', resp)
   },
   [USER_ERROR]: (state) => {
     state.status = 'error'

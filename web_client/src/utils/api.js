@@ -1,17 +1,21 @@
 import qs from 'qs';
 import axios from 'axios';
 
-function getRequestObject(data, url, method, type = 'application/x-www-form-urlencoded'){
-    return {
+function getRequestObject( url, method,data = null, type = 'application/x-www-form-urlencoded'){
+    let obj = {
         method: method,
-        headers: { 'content-type': type  },
-        data: qs.stringify(data),
-        url: 'http://api.sapechat.ru/' + url,
+        url: 'http://api.sapechat.ru/' + url
     };
+    if(method === "POST"){
+      obj.headers = { 'content-type': type  }
+      obj.data = data
+    }
+    return obj;
 }  
-  const apiCall = (url, method, data) => new Promise((resolve, reject) => {
+  const apiCall = (url, method, data = null) => new Promise((resolve, reject) => {
       try {
-        const query = getRequestObject(data, url, method)
+        if(method === 'POST') data = qs.stringify(data)
+        const query = getRequestObject(url, method, data)
        
         axios(query).then(resp =>  {
             resolve(resp.data)

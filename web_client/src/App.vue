@@ -4,10 +4,7 @@
       header
         #h-content
           #h-logo
-            button#switch(
-              @click="switchShow = !switchShow"
-              
-            )
+            button#switch(@click.prevent="switch_show")
               img(src='./assets/static/images/switch.png', alt='Переключить')
             router-link#logo(to="/") SapeChat
           #h-search
@@ -16,27 +13,27 @@
               button(@click="search()")
                 img(src='./assets/static/images/search_gray.png', alt='')
           #h-links(v-if="checkAuth")
-            router-link.h-link(to="/im") Профиль 
+            router-link.h-link(to="/im") Профиль
             router-link.h-link(to="/feed") Лента
             router-link.h-link(to="/messenger") Диалоги
             router-link.h-link(to="/people") Люди
             a(@click.prevent="logout" href="/logout" style="cursor:pointer") Выход
           #h-links(v-else)
             router-link.h-link(to="/signup") Регистрация
-        #hidden-area
-          #hidden-block(v-show = "switchShow")
+        #hidden-area()
+          #hidden-block(v-show = "getBriefStatus")
             .hidden-wrapper(v-if="signin_pass")
               #hidden-profile
-                a(href='')
-                  img#me-img(src='files/user_img/8.jpg', alt='Me')
-                a#hidden-username(href='') Имя Фамилия
-                span#hidden-email username@example.com
+                router-link.h-link(to="/im" )
+                  img#me-img(v-bind:src="getUserBrief.user_img", alt='Me', v-bind:title="getUserBrief.fullName")
+                router-link.h-link#hidden-username(to="/im") {{ getUserBrief.fullName }}
+                span#hidden-email {{ getUserBrief.user_email }}
               #hidden-list
-                a(href='')
+                router-link.h-link(to="/creat_conf" )
                   div
                     img(src='./assets/static/images/group_gray.png', alt='')
                   |        Создать конференцию
-                a(href='')
+                router-link.h-link(to="/settings" )
                   div
                     img(src='./assets/static/images/setting_gray.png', alt='')
                   |         Настройки
@@ -48,16 +45,18 @@
               #hidden-alert Войдите или зарегистриуйтесь
 
             span#hidden-version SapeChat v1.0
-    #main-content-wrapper 
+    #main-content-wrapper
       router-view
 </template>
 
 <script>
 import {AUTH_LOGOUT} from './store/actions/auth'
+import {USER_REQUEST} from './store/actions/user'
+import {BRIEF_SET} from './store/actions/global'
 import store from './store'
 
 export default {
-  data() {
+  data( ) {
     return {
       signin_pass: false,
       switchShow: false,
@@ -65,16 +64,31 @@ export default {
     }
   },
   methods: {
-      logout: function () {
+    logout: function () {
         this.$store.dispatch(AUTH_LOGOUT).then(() => {
           this.switchShow = false
           this.$router.push('/')
         })
+    },
+    switch_show( ) {
+      this.$store.dispatch(BRIEF_SET, !this.switchShow)
     }
   },
   computed:{
-    checkAuth(){
-      return this.signin_pass = store.getters.isAuthenticated;
+    checkAuth( ) {
+      return this.signin_pass = store.getters.isAuthenticated
+    },
+    getUserBrief( ) {
+      let brief = this.user_brief_info = store.getters.userBrief
+      if(!brief.user_id && store.getters.isAuthenticated){
+        this.$store.dispatch(USER_REQUEST, store.getters.getToken)
+      }
+      brief.fullName = brief.user_first_name + " " + brief.user_last_name
+      return brief
+    },
+    
+    getBriefStatus(){
+      return this.switchShow = store.getters.briefStatus
     }
   }
 }
