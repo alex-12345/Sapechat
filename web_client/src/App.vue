@@ -74,15 +74,22 @@ export default {
       this.$store.dispatch(BRIEF_SET, !this.switchShow)
     }
   },
+  beforeCreate(){
+    if(store.getters.isAuthenticated){
+      this.$store.dispatch('USER_REQUEST', store.getters.getToken).then(()=>{
+        this.user_brief_info = store.getters.userBrief
+        //console.log(this.user_brief_info)
+      })
+    }
+    
+
+  },
   computed:{
     checkAuth( ) {
       return this.signin_pass = store.getters.isAuthenticated
     },
     getUserBrief( ) {
-      let brief = this.user_brief_info = store.getters.userBrief
-      if(!brief.user_id && store.getters.isAuthenticated){
-        this.$store.dispatch(USER_REQUEST, store.getters.getToken)
-      }
+      let brief = this.user_brief_info 
       brief.fullName = brief.user_first_name + " " + brief.user_last_name
       return brief
     },

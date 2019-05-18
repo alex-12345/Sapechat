@@ -18,15 +18,19 @@ const getters = {
 
 const actions = {
   [USER_REQUEST]: ({commit, dispatch}, user_token) => {
-    apiCall('feed-getUserDataBrief?token=' + user_token, 'GET')
-      .then(resp => {
-        commit(USER_SUCCESS, resp.data)
-      })
-      .catch(resp => {
-        commit(USER_ERROR)
-        dispatch(AUTH_LOGOUT)
-      })
-  },
+    return new Promise((resolve, reject) => {
+      apiCall('feed-getUserDataBrief?token=' + user_token, 'GET')
+        .then(resp => {
+          commit(USER_SUCCESS, resp.data)
+          resolve(resp)
+        })
+        .catch(err => {
+          commit(USER_ERROR)
+          dispatch(AUTH_LOGOUT)
+          reject(err)
+        })
+    })
+  }
 }
 
 const mutations = {
@@ -34,6 +38,7 @@ const mutations = {
   },
   [USER_SUCCESS]: (state, resp) => {
     Vue.set(state, 'userBrief', resp)
+    localStorage['user-id'] = resp.user_id;
   },
   [USER_ERROR]: (state) => {
     state.status = 'error'

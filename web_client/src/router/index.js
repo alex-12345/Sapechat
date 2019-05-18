@@ -36,13 +36,13 @@ let router = new Router({
       path: "/feed",
       component: FeedNav,
       beforeEnter: ifAuthenticated,
-      children: [{path: '',component: Feed}, {path: 'id:id',component: Hot}]
+      children: [{path: '',component: Feed, name: "feed", props: true}, {path: 'id:id',component: Hot, props: true}]
     },
     {
       path: "/hot",
       component: FeedNav,
       beforeEnter: ifAuthenticated,
-      children: [{path: '',component: Hot}]
+      children: [{path: '',component: Hot, name: "hot"}]
     }
     
   ]

@@ -42,6 +42,7 @@ const actions = {
         console.log(resp);
           commit(AUTH_LOGOUT)
           localStorage.removeItem('user-token')
+          localStorage.removeItem('user-id')
           resolve()
         }
       )
