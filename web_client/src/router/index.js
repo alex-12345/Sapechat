@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
+import FeedNav from '@/components/FeedNav'
 import Feed from '@/components/Feed'
-import {BRIEF_SET} from '../store/actions/global'
-import store from '../store'
+import Hot from '@/components/Hot'
+import {BRIEF_SET} from '@/store/actions/global'
+import store from '@/store'
 
 Vue.use(Router)
 
@@ -27,15 +29,20 @@ let router = new Router({
   routes: [
     {
       path: "/",
-      name: "login",
       component: Login,
       beforeEnter: ifNotAuthenticated,
     },
     {
       path: "/feed",
-      name: "feed",
-      component: Feed,
+      component: FeedNav,
       beforeEnter: ifAuthenticated,
+      children: [{path: '',component: Feed}, {path: 'id:id',component: Hot}]
+    },
+    {
+      path: "/hot",
+      component: FeedNav,
+      beforeEnter: ifAuthenticated,
+      children: [{path: '',component: Hot}]
     }
     
   ]

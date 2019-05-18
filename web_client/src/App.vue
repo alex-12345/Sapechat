@@ -5,13 +5,13 @@
         #h-content
           #h-logo
             button#switch(@click.prevent="switch_show")
-              img(src='./assets/static/images/switch.png', alt='Переключить')
+              img(src='/static/images/switch.png', alt='Переключить')
             router-link#logo(to="/") SapeChat
           #h-search
             .search
               input(type='search', name='query', placeholder='Введите запрос...', required='', maxlength='40', autocomplete='off')
               button(@click="search()")
-                img(src='./assets/static/images/search_gray.png', alt='')
+                img(src='/static/images/search_gray.png', alt='')
           #h-links(v-if="checkAuth")
             router-link.h-link(to="/im") Профиль
             router-link.h-link(to="/feed") Лента
@@ -31,15 +31,15 @@
               #hidden-list
                 router-link.h-link(to="/creat_conf" )
                   div
-                    img(src='./assets/static/images/group_gray.png', alt='')
+                    img(src='/static/images/group_gray.png', alt='')
                   |        Создать конференцию
                 router-link.h-link(to="/settings" )
                   div
-                    img(src='./assets/static/images/setting_gray.png', alt='')
+                    img(src='/static/images/setting_gray.png', alt='')
                   |         Настройки
                 a(@click.prevent="logout" href="/logout" style="cursor:pointer")
                   div
-                    img(src='./assets/static/images/logout_gray.png', alt='')
+                    img(src='/static/images/logout_gray.png', alt='')
                   |         Выход
             .hidden-wrapper(v-else)
               #hidden-alert Войдите или зарегистриуйтесь
