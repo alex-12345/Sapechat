@@ -24,5 +24,18 @@ function getRequestObject( url, method,data = null, type = 'application/x-www-fo
         reject(new Error(err))
       }
   })
+
+  const syncApiCall = (url, method, data = null) => {
+    let xhr = new XMLHttpRequest();
+    xhr.open(method, 'http://api.sapechat.ru/' + url, false); 
+    if(method === 'POST') data = qs.stringify(data)
+    const query = getRequestObject(url, method, data)
+    xhr.send(query);
+    if (xhr.status != 200) {
+      console.log("Ошибка при обращании к серверу")
+    } else 
+      return JSON.parse(xhr.responseText) 
   
-  export default apiCall
+}
+  
+  export  {apiCall, syncApiCall}

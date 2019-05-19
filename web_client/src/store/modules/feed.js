@@ -1,4 +1,4 @@
-import apiCall from '@/utils/api'
+import {apiCall} from '@/utils/api'
 import Vue from 'vue'
 
 const state = { status: '', friendsAmount: 0, friendsList: null }

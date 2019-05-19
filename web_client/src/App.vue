@@ -60,7 +60,7 @@ export default {
     return {
       signin_pass: false,
       switchShow: false,
-      user_brief_info: {}
+      user_brief_info: null
     }
   },
   methods: {
@@ -74,12 +74,11 @@ export default {
       this.$store.dispatch(BRIEF_SET, !this.switchShow)
     }
   },
-  beforeCreate(){
+  created(){
     if(store.getters.isAuthenticated){
-      this.$store.dispatch('USER_REQUEST', store.getters.getToken).then(()=>{
-        this.user_brief_info = store.getters.userBrief
-        //console.log(this.user_brief_info)
-      })
+      this.$store.dispatch('USER_REQUEST', store.getters.getToken)
+      this.user_brief_info = store.getters.userBrief
+       
     }
     
 
@@ -89,7 +88,12 @@ export default {
       return this.signin_pass = store.getters.isAuthenticated
     },
     getUserBrief( ) {
-      let brief = this.user_brief_info 
+      let brief
+      if(this.user_brief_info) brief = this.user_brief_info 
+      else {
+        this.user_brief_info = store.getters.userBrief
+        brief = this.user_brief_info 
+      }
       brief.fullName = brief.user_first_name + " " + brief.user_last_name
       return brief
     },

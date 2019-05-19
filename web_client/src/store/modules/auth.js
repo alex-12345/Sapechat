@@ -1,6 +1,6 @@
 import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT } from '../actions/auth'
 import { USER_REQUEST } from '../actions/user'
-import apiCall from '../../utils/api'
+import {apiCall} from '../../utils/api'
 //import {getCookie, setCookie, deleteCookie} from '../../utils/cookie'
 
 const state = { 
@@ -41,8 +41,7 @@ const actions = {
       .then(resp => {
         console.log(resp);
           commit(AUTH_LOGOUT)
-          localStorage.removeItem('user-token')
-          localStorage.removeItem('user-id')
+          localStorage.clear() 
           resolve()
         }
       )

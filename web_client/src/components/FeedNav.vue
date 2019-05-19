@@ -40,19 +40,16 @@ export default {
       friends_list: {}
     }
   },
-  beforeCreate(){
+  created(){
+      this.user_brief_info = this.$parent.user_brief_info
       
-      const  id = localStorage['user-id']
+      const  id = this.user_brief_info.user_id
       const start = 0
-      const amount = 20 
+      const amount = 8 
       
       this.$store.dispatch('FRIENDS_LIST_REQUEST', { id, start, amount }).then(()=>{
           this.friends_list = this.$store.getters.friendsList
       })
-        
-  },
-  created(){
-    
       this.main_feed.status? this.main_feed.src = 'feed_white.png' : this.main_feed.src = 'feed_gray.png'
       this.hot_feed.status? this.hot_feed.src = 'hot_white.png': this.hot_feed.src = 'hot_gray.png'
   },
