@@ -4,6 +4,7 @@ import global from './modules/global'
 import user from './modules/user'
 import auth from './modules/auth'
 import feed from './modules/feed'
+import profile from './modules/profile'
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -13,7 +14,8 @@ export default new Vuex.Store({
     global,
     user,
     auth,
-    feed
+    feed,
+    profile
   },
   strict: debug
 })

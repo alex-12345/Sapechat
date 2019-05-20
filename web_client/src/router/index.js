@@ -4,8 +4,7 @@ import Login from '@/components/Login'
 import FeedNav from '@/components/FeedNav'
 import Feed from '@/components/Feed'
 import Hot from '@/components/Hot'
-import ProfileIm from '@/components/profile/ProfileIm'
-import ProfileUser from '@/components/profile/ProfileUser'
+import Profile from '@/components/Profile'
 import {BRIEF_SET} from '@/store/actions/global'
 import store from '@/store'
 
@@ -48,12 +47,16 @@ let router = new Router({
     },
     {
       path: "/im",
-      component: ProfileIm,
-      beforeEnter: ifAuthenticated
+      name: "im",
+      component: Profile,
+      beforeEnter: ifAuthenticated, 
+      props: true
     },
     {
       path: "/id:id",
-      component: ProfileUser, 
+      name: "profile",
+      component: Profile, 
+      props: true 
     }
     
   ]
