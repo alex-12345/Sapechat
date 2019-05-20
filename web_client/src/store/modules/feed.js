@@ -1,7 +1,7 @@
-import {apiCall} from '@/utils/api'
+import {apiCall, syncApiCall} from '@/utils/api'
 import Vue from 'vue'
 
-const state = { status: '', friendsAmount: 0, friendsList: null }
+const state = { status: '', friendsAmount: 0, friendsList: null, mainFeed: {} }
 
 
 const actions = {
@@ -28,21 +28,37 @@ const actions = {
         commit('FRIENDS_ERROR')
       })
   },
+  'LOAD_MAIN_FEED': ({commit, dispatch}, {token, start, amount}) => {
+      const url = 'feed-getFriendsFeed?token=' + token + '&start='+start + '&amount=' + amount
+      let resp = syncApiCall(url, 'GET')
+      commit('MAIN_FEED_SUCCESS', resp.data)
+      
+      return resp.data
+  }
 }
 
 const mutations = {
   'FRIENDS_LIST_SUCCESS': (state, resp) => {
     Vue.set(state, 'friendsList', resp)
   },
+  
   'FRIENDS_AMOUNT_SUCCESS': (state, resp) => {
     Vue.set(state, 'friends_amount', resp)
   },
+  'MAIN_FEED_SUCCESS': (state, resp) => {
+    Vue.set(state, 'mainFeed', resp)
+    console.log(resp)
+  },
   'FRIENDS_ERROR': (state) => {
+    state.status = 'error'
+  },
+  'FEED_ERROR': (state) => {
     state.status = 'error'
   }
 }
 const getters = {
-  friendsList: state =>  state.friendsList
+  friendsList: state =>  state.friendsList,
+  mainFeed: state =>  state.mainFeed
 }
 
 export default {

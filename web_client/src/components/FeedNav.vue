@@ -37,18 +37,21 @@ export default {
         src:  null
       },
       user_brief_info: {},
-      friends_list: {}
+      friends_list: {},
+      start_friend:0,
+      amount_friend: 8
     }
   },
   created(){
       this.user_brief_info = this.$parent.user_brief_info
       
-      const  id = this.user_brief_info.user_id
-      const start = 0
-      const amount = 8 
+      const id = this.user_brief_info.user_id
+      const start = this.start_friend
+      const amount = this.amount_friend
       
       this.$store.dispatch('FRIENDS_LIST_REQUEST', { id, start, amount }).then(()=>{
           this.friends_list = this.$store.getters.friendsList
+          this.start_friend += this.amount_friend
       })
       this.main_feed.status? this.main_feed.src = 'feed_white.png' : this.main_feed.src = 'feed_gray.png'
       this.hot_feed.status? this.hot_feed.src = 'hot_white.png': this.hot_feed.src = 'hot_gray.png'

@@ -4,6 +4,8 @@ import Login from '@/components/Login'
 import FeedNav from '@/components/FeedNav'
 import Feed from '@/components/Feed'
 import Hot from '@/components/Hot'
+import ProfileIm from '@/components/profile/ProfileIm'
+import ProfileUser from '@/components/profile/ProfileUser'
 import {BRIEF_SET} from '@/store/actions/global'
 import store from '@/store'
 
@@ -43,6 +45,15 @@ let router = new Router({
       component: FeedNav,
       beforeEnter: ifAuthenticated,
       children: [{path: '',component: Hot, name: "hot"}]
+    },
+    {
+      path: "/im",
+      component: ProfileIm,
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: "/id:id",
+      component: ProfileUser, 
     }
     
   ]
