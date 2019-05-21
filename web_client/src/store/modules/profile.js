@@ -1,7 +1,10 @@
 import {apiCall, syncApiCall} from '@/utils/api'
 import Vue from 'vue'
 
-const state = { 
+const state = {
+    status:null,
+    wall_status:null, 
+
     profileStatus: true, 
     profileInfo: {},
     friendsAmount: {},
@@ -37,13 +40,16 @@ const actions = {
       })
     })
   },
-  "PROFILE_POSTS_REQUEST": ({commit, dispatch}, {id, start, amount, flag}) => {
+  "PROFILE_POSTS_REQUEST": ({commit, dispatch}, {id, start, amount, flag, first_loading}) => {
     return new Promise((resolve, reject) => {
       let url = 'user-outputPosts?id=' + id + '&start='+start + '&amount=' + amount
       if(flag) url += "&owm_posts"
       apiCall(url, 'GET')
       .then(resp => {
-          commit('PROFILE_POSTS_SUCCESS', resp.data)
+          if(first_loading)
+            commit('PROFILE_POSTS_SUCCESS', resp.data)
+          else 
+            commit('PROFILE_PUSH_POSTS', resp.data)
           resolve(resp)
       })
       .catch(err => {
@@ -51,7 +57,23 @@ const actions = {
           reject(err)
       })
     })
-  }
+  },
+  "PROFILE_ADD_POST_REQUEST": ({commit, dispatch}, data) => {
+    
+    return new Promise((resolve, reject) => {
+      let url = 'wall-addPost'
+      apiCall(url, 'POST', data)
+      .then(resp => {
+        console.log(resp)
+          commit('PROFILE_ADD_POST_SUCCESS', {resp, data})
+          resolve(resp)
+      })
+      .catch(err => {
+          commit('WALL_ERROR', err)
+          reject(err)
+      })
+    })
+  },
 }
 
 const mutations = {
@@ -65,7 +87,30 @@ const mutations = {
   "PROFILE_POSTS_SUCCESS": (state, resp) => {
     Vue.set(state, 'postsList', resp)
   },
+  "PROFILE_PUSH_POSTS": (state, resp) => {
+    state.postsList = state.postsList.concat(resp)
+  },
+  "PROFILE_ADD_POST_SUCCESS": (state, {resp, data}) => {
+    const date = new Date()
+    const new_post ={
+      post_content: data.text,
+      post_id: resp.data.post_id,
+      post_time: '',
+      post_utc_date: date.toString(),
+      user_first_name: data.user_first_name,
+      user_last_name:data.user_last_name,
+      user_id: data.user_id,
+      user_img: data.user_img,
+      wall_id:data.wall_id
+    }
+    state.postsList.unshift(new_post)
+    console.log(new_post);
+    //Vue.set(state, 'postsList', resp)
+  },
   "PROFILE_ERROR": (state) => {
+    state.status = false
+  },
+  "WALL_ERROR": (state) => {
     state.status = false
   }
 }

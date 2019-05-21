@@ -25,7 +25,6 @@ class Wall extends RestrictedAccess{
 		if(!User::userExistenceCheck($this->wall_id)) return Reporter::error_report(4);
 		if(empty($this->text)) return Reporter::error_report(40);
 		if(!Model::setDBSession()) return false;
-
 		$post_id = Model::addPost(self::$current_user_id, $this->text, $this->wall_id);
 		if($post_id === 0) return Reporter::error_report(100);
 		return Reporter::output(["post_id" => $post_id]);
