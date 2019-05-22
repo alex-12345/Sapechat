@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import FeedNav from '@/components/FeedNav'
+import SearchNav from '@/components/SearchNav'
+import SearchStream from '@/components/SearchStream'
 import Feed from '@/components/Feed'
 import Hot from '@/components/Hot'
 import Profile from '@/components/Profile'
@@ -57,6 +59,13 @@ let router = new Router({
       name: "profile",
       component: Profile, 
       props: true 
+    },
+    {
+      path: "/people",
+      name: "people",
+      component: SearchNav,
+      props: true,
+      children: [{path: '',component: SearchStream, name: "all_search"}]
     }
     
   ]

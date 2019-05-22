@@ -5,6 +5,7 @@ import user from './modules/user'
 import auth from './modules/auth'
 import feed from './modules/feed'
 import profile from './modules/profile'
+import search from './modules/search'
 Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
@@ -15,7 +16,8 @@ export default new Vuex.Store({
     user,
     auth,
     feed,
-    profile
+    profile,
+    search
   },
   strict: debug
 })

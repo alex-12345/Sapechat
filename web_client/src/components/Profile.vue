@@ -2,6 +2,12 @@
 #profile_wrapper
     #profile_sub_wrapper.inline
         img.user_main_img(:src="user_info.user_img", :alt="user_info.user_full_name", :title="user_info.user_full_name")
+        router-link.button.settings_button(to="/seetings", v-if="this.$route.name == 'im'") Редактировать
+        .button_wrapper(v-else)
+            button.blue_friend_button(v-if="getRelationStatus == 0") Добавить в друзья
+            button.blue_friend_button(v-if="getRelationStatus == 1") Подтвердить дружбу
+            button.gray_friend_button(v-if="getRelationStatus == 2") Отозвать заявку
+            button.gray_friend_button(v-if="getRelationStatus == 3") Удалить из друзей
     #profile_main_wrapper.inline
         h5.user_profile_name {{user_info.user_full_name}}
         .profile_block_info
@@ -23,7 +29,7 @@
                     | {{friend.user_first_name}}
         span.post_filters
             span.post_filter(@click="loadPosts(0,20,false, true)", :class="{ active_filter: all_post_active}") Все записи
-            span.post_filter(@click="loadPosts(0,20,true, true)", :class="{ active_filter: !all_post_active}") Записи Имени
+            span.post_filter(@click="loadPosts(0,20,true, true)", :class="{ active_filter: !all_post_active}") Записи пользователя
         form#comment_form(v-on:submit.prevent="addPost" v-if="user_brief_info")
             img.user_image.inline(:src="user_brief_info.user_img", alt="no_img", :title="user_brief_info.user_first_name + ' ' + user_brief_info.user_last_name")
             #textarea_content.textarea.inline(aria-multiline="true", contenteditable="true", role="textbox", data-text="Напишите что-нибудь...")
@@ -50,7 +56,7 @@ export default {
         user_id: 0,
         user_brief_info: null,
         user_info: {},
-        friend_amount:{},
+        friend_amount:0,
         friend_list: {},
         user_posts: {},
         all_post_active:true,
@@ -112,6 +118,7 @@ export default {
         const token = localStorage['user-token']
         store.dispatch("PROFILE_ADD_POST_REQUEST", {user_id, text, user_img, user_first_name, user_last_name, wall_id, token}).then(resp => {
             document.getElementById("textarea_content").innerHTML = ""
+            this.post_start += 1
         })
 
         
@@ -144,7 +151,12 @@ export default {
           return this.friend_list = store.getters.pr_friends_list
       },
       showLoadButton:function(){
+          console.log(this.user_posts.length)
+          console.log(this.post_start)
           return this.user_posts.length ==this.post_start
+      },
+      getRelationStatus:function(){
+          return 1
       }
   }
 }

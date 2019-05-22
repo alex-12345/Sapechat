@@ -7,7 +7,7 @@ const state = {
 
     profileStatus: true, 
     profileInfo: {},
-    friendsAmount: {},
+    friendsAmount: 0,
     friendsList: {},
     postsList:{}
 
