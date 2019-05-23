@@ -43,7 +43,7 @@
                     router-link.post_user_name(:to="'/id' + post.user_id") {{post.user_first_name + ' ' +post.user_last_name}}
                     span.post_time Написанно {{post.post_utc_date }}
                     .post_text {{post.post_content}}
-        button.loadPosts(v-if="showLoadButton", @click="loadPosts(post_start,post_amount,!all_post_active, false)") Загрузить еще
+        button.loading(v-if="showLoadButton", @click="loadPosts(post_start,post_amount,!all_post_active, false)") Загрузить еще
 </template>
 
 <script>

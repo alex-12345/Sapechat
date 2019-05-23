@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import FeedNav from '@/components/FeedNav'
 import SearchNav from '@/components/SearchNav'
 import SearchStream from '@/components/SearchStream'
+import Messenger from '@/components/Messenger'
 import Feed from '@/components/Feed'
 import Hot from '@/components/Hot'
 import Profile from '@/components/Profile'
@@ -58,6 +59,12 @@ let router = new Router({
       path: "/id:id",
       name: "profile",
       component: Profile, 
+      props: true 
+    },
+    {
+      path: "/messenger",
+      name: "messenger",
+      component: Messenger, 
       props: true 
     },
     {
