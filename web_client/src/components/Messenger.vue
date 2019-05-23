@@ -86,7 +86,14 @@
             #chat_header_wrapper
                 #chat_title Название чата
                 #chat_subtitle 20 участников
-                button#chat_options
+                button#chat_options(@click.prevent="option_show = !option_show")
+                #options_list(v-show="option_show")
+                    router-link.option_item(to="/i") Основная информация
+                    .option_item Добавить собеседников
+                    .option_item Настройки
+                    .option_row
+                    .option_item Создать конференцию
+                    .option_item Покинуть беседу
             #chat_content_wrapper
                 .message
                     router-link(to='/id1')
@@ -147,7 +154,36 @@
 <script>
 export default {
     data(){
-        return {}
+        return {
+            "option_show": false
+        }
+    },
+    methods: {
+        hideOption: function(){
+            this.option_show = false
+        },
+        scrollElement: function(element){
+            console.log(element)
+            console.log(element.scrollHeight )
+        }
+    },
+    created() {
+           document.addEventListener('mouseup', (e) => {
+               const op_but = document.getElementById('chat_options');
+               const op_area = document.getElementById('options_list');
+               if(e.target != op_but || e.target != op_but) {
+                   this.hideOption()
+               }
+            });
+    },
+    mounted(){
+        const chat_height = Math.max(
+            document.body.scrollHeight, document.documentElement.scrollHeight,
+            document.body.offsetHeight, document.documentElement.offsetHeight,
+            document.body.clientHeight, document.documentElement.clientHeight
+        )
+        window.scrollTo(0, chat_height)
+
     }
 }
 </script>
