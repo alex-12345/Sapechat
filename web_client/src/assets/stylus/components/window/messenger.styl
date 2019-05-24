@@ -5,7 +5,8 @@
     right: 0px
     background: white
     border:1px solid #eee
-    border-radius: 5px;
+    border-radius: 5px
+    box-shadow: 0 0 10px 3px rgba(221, 221, 221, 1)
     .option_item
         font-size: 13px
         color: #171C30
@@ -19,3 +20,73 @@
     .option_row
         border-bottom: 1px solid #eee
         margin: 0 10px
+
+.window_area
+    width: 100%
+    height: 100%
+    background: rgba(0,0,0,0.6)
+    position: fixed
+    top: 0
+    left: 0
+    z-index: 4
+    overflow-y: auto
+
+.window_content
+    width: 500px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 10px
+    padding-bottom: 10px
+    .window_title
+        background: #4E596D
+        border-radius: 5px 5px 0 0
+        padding: 15px 20px
+        font-size: 16px
+        font-weight: normal
+        color:white
+    h3
+        margin: 15px 35px 0px 20px;
+        font-family: $primary_font
+        font-size: 14px
+        padding: 7px 5px
+        border-bottom: 1px solid #ccc
+        color: #333
+    .chat_user_wrapper
+        position: relative
+        padding: 5px 30px
+    .chat_user_img
+        width: 40px
+        height 40px
+        border-radius: 50%
+        margin: 5px 5px 0 0
+    .chat_user_name
+        position: absolute
+        top: 12px
+        left: 90px
+        text-decoration: none
+        color: #222
+        font-weight: bold
+        font-size: 13px
+    .chat_user_description
+        position: absolute
+        top: 30px
+        left: 90px
+        font-size: 13px
+        color: #333
+.chat_info_header_wrapper
+    padding: 0px 20px
+    position: relative
+    height: 50px
+    .chat_element_img_wrapper
+        top:0
+        left:20px
+    input[type=text]
+        font-family: $primary_font
+        font-size: 13px
+        padding: 8px 12px
+        width: 350px
+        border: 1px solid #ddd
+        margin: 10px 0 0 70px
+        border-radius: 2px
+
+    

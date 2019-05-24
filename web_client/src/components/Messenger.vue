@@ -88,11 +88,9 @@
                 #chat_subtitle 20 участников
                 button#chat_options(@click.prevent="option_show = !option_show")
                 #options_list(v-show="option_show")
-                    router-link.option_item(to="/i") Основная информация
-                    .option_item Добавить собеседников
-                    .option_item Настройки
+                    .option_item(@click="openInfo") Основная информация
                     .option_row
-                    .option_item Создать конференцию
+                    .option_item Добавить собеседников
                     .option_item Покинуть беседу
             #chat_content_wrapper
                 .message
@@ -148,6 +146,57 @@
                 #textarea_wrapper
                     img#chat_input_img(src='/static/dev/3.jpg', alt='')
                     .textarea(aria-multiline='true', contenteditable='true', role='textbox', data-text='Введите сообщение...')
+        .window_area(v-show="window_area_show")
+            .window_content(v-show="chat_info_show")
+                h2.window_title Информация
+                form.chat_info_header_wrapper
+                    .chat_element_img_wrapper
+                        .image_half_left
+                            router-link.image_half_top(to="/id1")
+                                img.chat_img(alt="", title="", src="/static/dev/8.jpg") 
+                            router-link.image_half_bottom(to="/id4")
+                                img.chat_img(alt="", title="", src="/static/dev/9.jpg")
+                        .image_half_right
+                            router-link.image_half_top(to="/id2")
+                                img.chat_img(alt="", title="", src="/static/dev/11.jpg") 
+                            router-link.image_half_bottom(to="/id4")
+                                img.chat_img(alt="", title="", src="/static/dev/10.jpg")
+                    .chat_name_wrapper
+                        input.chat_name(type="text", value="Название чата", placeholder="Введите название чата", require)
+                h3 Администратор чата
+                .chat_user_wrapper
+                    img.chat_user_img(src="/static/dev/ava.jpg" alt="")
+                    router-link.chat_user_name(to="/id1") Имя Фамилия
+                    .chat_user_description Создал чат 12.05.2019   
+                h3 Участники чата (20)
+                .chat_user_wrapper
+                    img.chat_user_img(src="/static/dev/2.jpg" alt="")
+                    router-link.chat_user_name(to="/id1") Имя Фамилия
+                    .chat_user_description Приглашен 12.05.2019
+                .chat_user_wrapper
+                    img.chat_user_img(src="/static/dev/4.jpg" alt="")
+                    router-link.chat_user_name(to="/id1") Имя Фамилия
+                    .chat_user_description Приглашен 12.05.2019
+                .chat_user_wrapper
+                    img.chat_user_img(src="/static/dev/5.jpg" alt="")
+                    router-link.chat_user_name(to="/id1") Имя Фамилия
+                    .chat_user_description Приглашен 12.05.2019
+                .chat_user_wrapper
+                    img.chat_user_img(src="/static/dev/6.jpg" alt="")
+                    router-link.chat_user_name(to="/id1") Имя Фамилия
+                    .chat_user_description Приглашен 12.05.2019
+                .chat_user_wrapper
+                    img.chat_user_img(src="/static/dev/7.jpg" alt="")
+                    router-link.chat_user_name(to="/id1") Имя Фамилия
+                    .chat_user_description Приглашен 12.05.2019
+                .chat_user_wrapper
+                    img.chat_user_img(src="/static/dev/8.jpg" alt="")
+                    router-link.chat_user_name(to="/id1") Имя Фамилия
+                    .chat_user_description Приглашен 12.05.2019
+
+
+
+
 
 </template>
 
@@ -155,16 +204,27 @@
 export default {
     data(){
         return {
-            "option_show": false
+            "option_show": false,
+            "window_area_show": false,
+            "chat_info_show": false
         }
     },
     methods: {
         hideOption: function(){
             this.option_show = false
         },
-        scrollElement: function(element){
-            console.log(element)
-            console.log(element.scrollHeight )
+        openInfo: function(){
+            this.window_area_show = true,
+            this.chat_info_show = true
+            document.getElementsByTagName('body')[0].classList.add("body_no_scroll");
+            document.addEventListener('mouseup', (e) => {
+               const win_area = document.getElementsByClassName('window_area')[0]
+               if(e.target == win_area) {
+                    this.window_area_show = false,
+                    this.chat_info_show = false
+                    document.getElementsByTagName('body')[0].classList.remove("body_no_scroll");
+               }
+            });
         }
     },
     created() {
